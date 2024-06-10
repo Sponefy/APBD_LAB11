@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Lab11.Models;
 
 public class Prescription_Medicament

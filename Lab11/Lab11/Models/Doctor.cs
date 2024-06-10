@@ -1,7 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Lab11.Models;
 
 public class Doctor
 {
+    [Key]
     public int IdDoctor { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }

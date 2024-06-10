@@ -1,7 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Lab11.Models;
 
 public class Prescription
 {
+    [Key]
     public int IdPrescription { get; set; }
     public DateOnly Date { get; set; }
     public DateOnly DueDate { get; set; }
