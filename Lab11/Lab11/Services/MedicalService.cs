@@ -1,11 +1,7 @@
 using Lab11.Data;
-using Lab11.Migrations;
 using Lab11.Models.Dtos;
 using Lab11.Models;
 using Microsoft.EntityFrameworkCore;
-using Patient = Lab11.Models.Patient;
-using Prescription = Lab11.Models.Prescription;
-using Prescription_Medicament = Lab11.Models.Prescription_Medicament;
 
 namespace Lab11.Services;
 

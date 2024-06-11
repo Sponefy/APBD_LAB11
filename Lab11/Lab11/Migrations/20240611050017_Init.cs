@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Lab11.Migrations
 {
     /// <inheritdoc />
-    public partial class Doctor : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -49,7 +49,7 @@ namespace Lab11.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BirthDate = table.Column<DateOnly>(type: "date", nullable: false)
+                    BirthDate = table.Column<DateTime>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -62,8 +62,8 @@ namespace Lab11.Migrations
                 {
                     IdPrescription = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateOnly>(type: "date", nullable: false),
-                    DueDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    DueDate = table.Column<DateTime>(type: "date", nullable: false),
                     IdPatient = table.Column<int>(type: "int", nullable: false),
                     IdDoctor = table.Column<int>(type: "int", nullable: false)
                 },
@@ -91,7 +91,7 @@ namespace Lab11.Migrations
                     IdMedicament = table.Column<int>(type: "int", nullable: false),
                     IdPrescription = table.Column<int>(type: "int", nullable: false),
                     Dose = table.Column<int>(type: "int", nullable: false),
-                    Deatails = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Details = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

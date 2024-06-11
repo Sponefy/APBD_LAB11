@@ -44,7 +44,7 @@ namespace Lab11.Migrations
 
                     b.HasKey("IdDoctor");
 
-                    b.ToTable("Doctors", (string)null);
+                    b.ToTable("Doctors");
                 });
 
             modelBuilder.Entity("Lab11.Models.Medicament", b =>
@@ -69,7 +69,7 @@ namespace Lab11.Migrations
 
                     b.HasKey("IdMedicament");
 
-                    b.ToTable("Medicaments", (string)null);
+                    b.ToTable("Medicaments");
                 });
 
             modelBuilder.Entity("Lab11.Models.Patient", b =>
@@ -80,7 +80,7 @@ namespace Lab11.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPatient"));
 
-                    b.Property<DateOnly>("BirthDate")
+                    b.Property<DateTime>("BirthDate")
                         .HasColumnType("date");
 
                     b.Property<string>("FirstName")
@@ -93,7 +93,7 @@ namespace Lab11.Migrations
 
                     b.HasKey("IdPatient");
 
-                    b.ToTable("Patients", (string)null);
+                    b.ToTable("Patients");
                 });
 
             modelBuilder.Entity("Lab11.Models.Prescription", b =>
@@ -104,10 +104,10 @@ namespace Lab11.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPrescription"));
 
-                    b.Property<DateOnly>("Date")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("date");
 
-                    b.Property<DateOnly>("DueDate")
+                    b.Property<DateTime>("DueDate")
                         .HasColumnType("date");
 
                     b.Property<int>("IdDoctor")
@@ -122,7 +122,7 @@ namespace Lab11.Migrations
 
                     b.HasIndex("IdPatient");
 
-                    b.ToTable("Presciptions", (string)null);
+                    b.ToTable("Presciptions");
                 });
 
             modelBuilder.Entity("Lab11.Models.Prescription_Medicament", b =>
@@ -144,7 +144,7 @@ namespace Lab11.Migrations
 
                     b.HasIndex("IdPrescription");
 
-                    b.ToTable("PrescriptionMedicaments", (string)null);
+                    b.ToTable("PrescriptionMedicaments");
                 });
 
             modelBuilder.Entity("Lab11.Models.Prescription", b =>

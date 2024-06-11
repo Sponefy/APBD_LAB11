@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lab11.Migrations
 {
     [DbContext(typeof(ApbdContext))]
-    [Migration("20240610130358_Doctor")]
-    partial class Doctor
+    [Migration("20240611050017_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -83,7 +83,7 @@ namespace Lab11.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPatient"));
 
-                    b.Property<DateOnly>("BirthDate")
+                    b.Property<DateTime>("BirthDate")
                         .HasColumnType("date");
 
                     b.Property<string>("FirstName")
@@ -107,10 +107,10 @@ namespace Lab11.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPrescription"));
 
-                    b.Property<DateOnly>("Date")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("date");
 
-                    b.Property<DateOnly>("DueDate")
+                    b.Property<DateTime>("DueDate")
                         .HasColumnType("date");
 
                     b.Property<int>("IdDoctor")
@@ -136,7 +136,7 @@ namespace Lab11.Migrations
                     b.Property<int>("IdPrescription")
                         .HasColumnType("int");
 
-                    b.Property<string>("Deatails")
+                    b.Property<string>("Details")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -153,7 +153,7 @@ namespace Lab11.Migrations
             modelBuilder.Entity("Lab11.Models.Prescription", b =>
                 {
                     b.HasOne("Lab11.Models.Doctor", "Doctor")
-                        .WithMany("Presciption")
+                        .WithMany("Presciptions")
                         .HasForeignKey("IdDoctor")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -190,7 +190,7 @@ namespace Lab11.Migrations
 
             modelBuilder.Entity("Lab11.Models.Doctor", b =>
                 {
-                    b.Navigation("Presciption");
+                    b.Navigation("Presciptions");
                 });
 
             modelBuilder.Entity("Lab11.Models.Medicament", b =>
