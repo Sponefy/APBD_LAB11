@@ -4,6 +4,7 @@ using Lab11.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lab11.Migrations
 {
     [DbContext(typeof(ApbdContext))]
-    partial class ApbdContextModelSnapshot : ModelSnapshot
+    [Migration("20240610193202_Test001")]
+    partial class Test001
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,7 +47,7 @@ namespace Lab11.Migrations
 
                     b.HasKey("IdDoctor");
 
-                    b.ToTable("Doctors", (string)null);
+                    b.ToTable("Doctors");
                 });
 
             modelBuilder.Entity("Lab11.Models.Medicament", b =>
@@ -69,7 +72,7 @@ namespace Lab11.Migrations
 
                     b.HasKey("IdMedicament");
 
-                    b.ToTable("Medicaments", (string)null);
+                    b.ToTable("Medicaments");
                 });
 
             modelBuilder.Entity("Lab11.Models.Patient", b =>
@@ -93,7 +96,7 @@ namespace Lab11.Migrations
 
                     b.HasKey("IdPatient");
 
-                    b.ToTable("Patients", (string)null);
+                    b.ToTable("Patients");
                 });
 
             modelBuilder.Entity("Lab11.Models.Prescription", b =>
@@ -122,7 +125,7 @@ namespace Lab11.Migrations
 
                     b.HasIndex("IdPatient");
 
-                    b.ToTable("Presciptions", (string)null);
+                    b.ToTable("Presciptions");
                 });
 
             modelBuilder.Entity("Lab11.Models.Prescription_Medicament", b =>
@@ -144,7 +147,7 @@ namespace Lab11.Migrations
 
                     b.HasIndex("IdPrescription");
 
-                    b.ToTable("PrescriptionMedicaments", (string)null);
+                    b.ToTable("PrescriptionMedicaments");
                 });
 
             modelBuilder.Entity("Lab11.Models.Prescription", b =>

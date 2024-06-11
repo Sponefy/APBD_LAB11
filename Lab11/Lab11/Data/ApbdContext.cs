@@ -33,10 +33,10 @@ public class ApbdContext : DbContext
         modelBuilder.Entity<Prescription_Medicament>()
             .HasKey(pm => new { pm.IdMedicament, pm.IdPrescription });
         
-        modelBuilder.Entity<Prescription>()
-            .HasOne(p => p.Doctor)
-            .WithMany(d => d.Presciption)
-            .HasForeignKey(p => p.IdDoctor);
+        // modelBuilder.Entity<Prescription>()
+        //     .HasOne(p => p.Doctor)
+        //     .WithMany(d => d.Presciption)
+        //     .HasForeignKey(p => p.IdDoctor);
 
         modelBuilder.Entity<Prescription>()
             .HasOne(p => p.Patient)
