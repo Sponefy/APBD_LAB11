@@ -40,7 +40,7 @@ public class ApbdContext : DbContext
 
         modelBuilder.Entity<Prescription>()
             .HasOne(p => p.Patient)
-            .WithMany(p => p.Presciption)
+            .WithMany(p => p.Presciptions)
             .HasForeignKey(p => p.IdPatient);
 
         modelBuilder.Entity<Prescription_Medicament>()

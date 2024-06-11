@@ -13,5 +13,5 @@ public class Patient
     public DateTime BirthDate { get; set; }
     
     
-    public ICollection<Prescription> Presciption { get; set; }
+    public ICollection<Prescription> Presciptions { get; set; }
 }

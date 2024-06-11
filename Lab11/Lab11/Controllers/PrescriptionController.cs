@@ -32,4 +32,17 @@ public class PrescriptionController : ControllerBase
 
         return Ok(new {Id = id});
     }
+    
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetPatient(int id)
+    {
+        var patient = await _medicalService.GetPatient(id);
+
+        if (patient == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(patient);
+    }
 }

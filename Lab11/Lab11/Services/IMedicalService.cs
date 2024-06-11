@@ -6,4 +6,5 @@ public interface IMedicalService
 {
     Task<string> ValidatePrescription(PrescriptionDto prescription);
     Task<int> SavePrescription(PrescriptionDto prescription);
+    Task<GetPatientDto?> GetPatient(int id);
 }

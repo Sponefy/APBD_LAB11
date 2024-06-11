@@ -21,15 +21,15 @@ public class MedicalService : IMedicalService
         {
             return "Doctor doesn't exist";
         }
-        
+
         // Inny sposób ale mniej optymalny:
-        
+
         // var doctor = await _context.Doctors.FindAsync(prescription.DoctorId);
         // if (doctor == null)
         // {
         //     return BadRequest("Doctor doesn't exist");
         // }
-        
+
         // Sprawdzanie, czy lek istnieje i czy ilość jest zgodna
         if (prescription.Medicaments.Count > 10)
         {
@@ -51,11 +51,12 @@ public class MedicalService : IMedicalService
         {
             return "DueDate invalid";
         }
+
         if (prescription.Date != prescription.Date.Date)
         {
             return "Date invalid";
         }
-        
+
         // Sprawdzanie, czy daty ważności się zgadza
         if (prescription.DueDate < prescription.Date)
         {
@@ -69,7 +70,7 @@ public class MedicalService : IMedicalService
     {
         // Tworzenie transakcji
         // await using var transaction = await _context.Database.BeginTransactionAsync();
-        
+
         // Sprawdzanie, czy pacjent istnieje
         var patient = await _context.Patients.FindAsync(prescription.Patient.IdPatient);
         if (patient == null)
@@ -79,12 +80,11 @@ public class MedicalService : IMedicalService
                 FirstName = prescription.Patient.FirstName,
                 LastName = prescription.Patient.LastName,
                 BirthDate = prescription.Patient.BirthDate
-
             };
             await _context.Patients.AddAsync(patient);
             // await _context.SaveChangesAsync();
         }
-        
+
         // Tworzenie nowej recepty
         var newPrescription = new Prescription
         {
@@ -95,7 +95,7 @@ public class MedicalService : IMedicalService
             IdDoctor = prescription.DoctorId
         };
         await _context.Presciptions.AddAsync(newPrescription);
-        
+
         // Dodawanie leków do recepty
         foreach (var medicament in prescription.Medicaments)
         {
@@ -114,5 +114,55 @@ public class MedicalService : IMedicalService
         // await transaction.CommitAsync();
 
         return newPrescription.IdPrescription;
+    }
+
+    public async Task<GetPatientDto?> GetPatient(int id)
+    {
+        var patient = await _context.Patients
+            .Where(x => x.IdPatient == id)
+            .Select(x => new GetPatientDto
+            {
+                IdPatient = x.IdPatient,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                BirthDate = x.BirthDate
+            })
+            .SingleOrDefaultAsync();
+        
+        if (patient == null)
+        {
+            return null;
+        }
+
+        patient.Prescriptions = await _context.Presciptions
+            .Where(x => x.IdPatient == id)
+            .Select(x => new GetPrescriptionDto
+            {
+                IdPrescription = x.IdPrescription,
+                Date = x.Date,
+                DueDate = x.DueDate,
+                Doctor = new GetDoctorDto
+                {
+                    IdDoctor = x.IdDoctor,
+                    FirstName = x.Doctor.FirstName
+                }
+            })
+            .ToListAsync();
+
+        foreach (var prescription in patient.Prescriptions)
+        {
+            prescription.Medicaments = await _context.PrescriptionMedicaments
+                .Where(x => x.IdPrescription == prescription.IdPrescription)
+                .Select(x => new GetMedicamentDto
+                {
+                    IdMedicament = x.IdMedicament,
+                    Name = x.Medicament.Name,
+                    Description = x.Details,
+                    Dose = x.Dose
+                })
+                .ToListAsync();
+        }
+        
+        return patient;
     }
 }
